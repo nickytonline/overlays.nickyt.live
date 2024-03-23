@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getStreamGuestInfo } from "../utils/guest-info";
+
+const today = new Date("2024-03-21");
+const streamDate = today.toISOString().slice(0, 10);
+const streamGuestInfo = await getStreamGuestInfo(streamDate);
+const {
+  guestName = "NO GUEST!!!!!!",
+  guestTitle,
+  streamTitle = "NO STREAM TITLE!!!!!!",
+} = streamGuestInfo;
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "stale-while-revalidate=3600, max-age=3600"
+);
+---
+
+<Layout title="Guest info overlay for nickyt.live">
+  <footer
+    class="absolute bottom-0 pl-4 text-green-950 font-bold bg-pink-300 w-full h-56 border-t-8 border-pink-600"
+  >
+    <header class="pt-2 text-3xl font-sans">
+      <h1>{streamTitle}</h1>
+      <h2>{guestName}{guestTitle ? `, ${guestTitle}` : ""}</h2>
+    </header>
+    <p class="absolute text-7xl bottom-0 pb-4">
+      nickyt<span class="live stroke-2 fill-pink-600"
+        ><span class="dot">.</span>live</span
+      >
+    </p>
+  </footer>
+</Layout>
+<style>
+  footer {
+    font-family: "Bai Jamjuree";
+  }
+  .live {
+    -webkit-text-stroke-color: rgb(5 46 22 / var(--tw-text-opacity));
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-fill-color: white;
+  }
+
+  .dot {
+    -webkit-text-fill-color: red;
+  }
+</style>

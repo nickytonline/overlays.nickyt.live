@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { getStreamGuestInfo } from "../utils/guest-info";
 
-const today = new Date("2024-03-21");
+const today = new Date();
 const streamDate = today.toISOString().slice(0, 10);
 const streamGuestInfo = await getStreamGuestInfo(streamDate);
 const {

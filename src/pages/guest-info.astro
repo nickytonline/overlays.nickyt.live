@@ -12,8 +12,8 @@ const {
 } = streamGuestInfo;
 
 Astro.response.headers.set(
-  "Cache-Control",
-  "stale-while-revalidate=3600, max-age=3600"
+  "Netlify-CDN-Cache-Control",
+  "public, max-age=0, stale-while-revalidate=1800"
 );
 ---
 

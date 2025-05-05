@@ -6,9 +6,9 @@ const today = new Date();
 const streamDate = today.toISOString().slice(0, 10);
 const streamGuestInfo = await getStreamGuestInfo(streamDate);
 const {
-  guestName = "NO GUEST!!!!!!",
+  guestName = "",
   guestTitle,
-  streamTitle = "NO STREAM TITLE!!!!!!",
+  streamTitle = "Code and Chill",
 } = streamGuestInfo;
 
 Astro.response.headers.set(
